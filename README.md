@@ -1,6 +1,6 @@
 # mapping-mothman
 
-(From Wikipedia)[https://en.wikipedia.org/wiki/Mothman]
+[https://en.wikipedia.org/wiki/Mothman](From Wikipedia)
 
 <blockquote>
 In West Virginia folklore, the Mothman is a creature reportedly seen in the Point Pleasant area from November 12, 1966, to December 15, 1967. The first newspaper report was published in the Point Pleasant Register dated November 16, 1966, titled "Couples See Man-Sized Bird ... Creature ... Something".[1] The national press soon picked up the reports and helped spread the story across the United States.
