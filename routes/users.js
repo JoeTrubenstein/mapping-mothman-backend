@@ -41,12 +41,12 @@ router.get("/admin-dashboard/:id", function(req, res, next) {
     });
 });
 
-// GET in via passport with username and password
+// POST in via passport with username and password
 router.post(
   "/signin",
   passport.authenticate("local-login", {
-    successRedirect: "/",
-    failureRedirect: "/users/signin",
+    successRedirect: "../users/admin-dashboard",
+    failureRedirect: "/",
     failureFlash: true
   })
 );

@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% include ./partials/styles %>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Sign in to begin</p>
+    <form method="POST" action="/users/signin">
+      <input name="email" placeholder="email" />
+      <input name="password" placeholder="password" />
+      <br/><br/>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <% include ./partials/scripts %>
   </body>
 </html>
