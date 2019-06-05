@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./partials/styles %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1><%= title %></h1>
+      <h5>Moderator approval dashboard</h5>
+      <div class="jumbotron">
+        <h1 class="display-4"><%= sighting.witness %></h1>
+        <h4>seen <%= sighting.seenDate %> in <%= sighting.location %></h4>
+        <h4>reported <%= sighting.submitDate %></h4>
+        <hr class="my-4" />
+        <p class="lead">
+          <%= sighting.description %>
+        </p>
+
+        <p>
+          Image Placeholder
+        </p>
+        <small>approved: <%= sighting.isApproved%></small>
+        <br />
+        <a
+          class="btn btn-primary btn-lg"
+          href="./approve-sighting/<%= sighting.id%>"
+          role="button"
+          >Approve</a
+        >
+        <a
+          class="btn btn-primary btn-lg"
+          href="./reject-sighting/<%= sighting.id%>"
+          role="button"
+          >Reject</a
+        >
+      </div>
+    </div>
+    <% include ./partials/scripts %>
+  </body>
+</html>

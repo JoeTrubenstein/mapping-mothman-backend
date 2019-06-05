@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./partials/styles %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1><%= title %></h1>
+      <h5>Moderator approval dashboard</h5>
+      <p>The following sightings require review</p>
+      <div class="card-deck mb-3 text-center">
+        <% for (let i = 0; i < sightings.length; i++) { %> <% if
+        (sightings[i].isApproved === false) { %>
+        <div class="row">
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+              <img
+                src="https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png"
+                class="card-img-top"
+                alt="mothman sighting"
+                style="max-height: 200px"
+              />
+              <div class="card-body">
+                <h5 class="card-title"><%= sightings[i].witness %></h5>
+                <h6><%= sightings[i].location %></h6>
+                <h6><%= sightings[i].seenDate %></h6>
+                <p class="card-text">
+                  <%= sightings[i].description %>
+                </p>
+                <a
+                  href="/users/admin-dashboard/<%= sightings[i].id %>"
+                  class="btn btn-primary"
+                  >Review</a
+                >
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+        <% } %> <% } %>
+      </div>
+      <p>Verified Sightings</p>
+      <div class="card-deck mb-3 text-center">
+        <% for (let i = 0; i < sightings.length; i++) { %> <% if
+        (sightings[i].isApproved === true) { %>
+        <div class="row">
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+              <img
+                src="https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png"
+                class="card-img-top"
+                alt="mothman sighting"
+                style="max-height: 200px"
+              />
+              <div class="card-body">
+                <h5 class="card-title"><%= sightings[i].witness %></h5>
+                <h6><%= sightings[i].location %></h6>
+                <h6><%= sightings[i].seenDate %></h6>
+                <p class="card-text">
+                  <%= sightings[i].description %>
+                </p>
+                <a
+                  href="/users/admin-dashboard/<%= sightings[i].id %>"
+                  class="btn btn-primary"
+                  >Review</a
+                >
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+        <% } %> <% } %>
+      </div>
+    </div>
+    <% include ./partials/scripts %>
+  </body>
+</html>
