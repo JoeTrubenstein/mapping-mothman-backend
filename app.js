@@ -11,6 +11,7 @@ var session = require('express-session')
 var moment = require('moment')
 
 var MongoStore = require("connect-mongo")(session);
+
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
@@ -55,9 +56,9 @@ app.use(
 
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
-require("./lib/passport/passport")(passport);
+require("./utils/passport")(passport);
 
 // locals
 app.use(function(req, res, next) {

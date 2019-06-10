@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require("passport");
 
 var sightingController = require("../controllers/sightingController");
-
+var jwtController = require("../controllers/jwtController")
 var userController = require("../controllers/userController");
 
 /* GET users listing. */
@@ -41,15 +41,17 @@ router.get("/admin-dashboard/:id", function(req, res, next) {
     });
 });
 
-// POST in via passport with username and password
-router.post(
-  "/signin",
-  passport.authenticate("local-login", {
-    successRedirect: "../users/admin-dashboard",
-    failureRedirect: "/",
-    failureFlash: true
-  })
-);
+// POST in 
+router.post("/signin", function(req, res, next) {
+  jwtController
+    .login(req.body)
+    .then(user => {
+      res.json(user);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
 
 /* POST a new user. */
 router.post("/signup", function(req, res, next) {
