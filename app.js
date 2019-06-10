@@ -6,6 +6,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var flash  = require("flash");
 var passport = require("passport");
+var cors = require('cors')
 
 var session = require('express-session')
 var moment = require('moment')
@@ -30,6 +31,7 @@ mongoose
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(cors())
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
