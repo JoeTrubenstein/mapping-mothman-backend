@@ -11,7 +11,7 @@ router.get("/", function(req, res, next) {
   res.send("respond with a resource");
 });
 
-/* GET all Sightings */
+/* GET all Sightings for admin */
 router.get("/admin-dashboard", function(req, res, next) {
   sightingController
     .getAllSightings()
@@ -25,6 +25,17 @@ router.get("/admin-dashboard", function(req, res, next) {
       res.json(error);
     });
 });
+
+/* GET all Sightings for front end */
+router.get('/get-sightings', function(req, res, next) {
+  sightingController.getAllSightings()
+                    .then( sightings => {
+                      res.send(sightings)
+                    })
+                    .catch( error => {
+                      res.json(error)
+                    })
+ })
 
 /* GET a Sighting by ID for review */
 router.get("/admin-dashboard/:id", function(req, res, next) {
