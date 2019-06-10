@@ -37,6 +37,17 @@ router.get('/get-sightings', function(req, res, next) {
                     })
  })
 
+ /* GET sightings for admin dash for front end */
+router.get('/get-dash-sightings',passport.authenticate("jwt", { session: false }), function(req, res, next) {
+  sightingController.getAllSightings()
+                    .then( sightings => {
+                      res.send(sightings)
+                    })
+                    .catch( error => {
+                      res.json(error)
+                    })
+ })
+
 /* GET a Sighting by ID for review */
 router.get("/admin-dashboard/:id", function(req, res, next) {
   sightingController
