@@ -8,6 +8,7 @@ module.exports = {
       (newSighting.witness = params.witness),
         (newSighting.seenDate = params.seenDate),
         (newSighting.location = params.location),
+        (newSighting.isApproved = false),
         (newSighting.description = params.description);
 
       newSighting
