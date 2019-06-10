@@ -7,7 +7,6 @@ module.exports = {
     return new Promise((resolve, reject) => {
       User.findOne({ username: params.username })
         .then(user => {
-          console.log(user);
           if (user) {
             bcrypt
               .compare(params.password, user.password)
@@ -189,7 +188,6 @@ module.exports = {
                     email: user.email,
                     username: user.username
                   };
-
                   jwt.sign(
                     payload,
                     process.env.SECRET_KEY,

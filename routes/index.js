@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Mapping Mothman Admin' });
 });
 
-/* JWT test */
+/* JWT tests */
 router.get("/jwt", passport.authenticate("jwt", { session: false }), function(
   req,
   res,
@@ -15,4 +15,9 @@ router.get("/jwt", passport.authenticate("jwt", { session: false }), function(
 ) {
   res.send("thanks for hitting the api");
 });
+
+router.get('/token', function(req, res, next) {
+  res.json(req.headers);
+});
+
 module.exports = router;

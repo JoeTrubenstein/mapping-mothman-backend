@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require("passport");
 
 var sightingController = require("../controllers/sightingController");
-var jwtController = require("../controllers/jwtController")
+var jwtController = require("../controllers/jwtController");
 var userController = require("../controllers/userController");
 
 /* GET users listing. */
@@ -27,15 +27,16 @@ router.get("/admin-dashboard", function(req, res, next) {
 });
 
 /* GET all Sightings for front end */
-router.get('/get-sightings', function(req, res, next) {
-  sightingController.getAllSightings()
-                    .then( sightings => {
-                      res.send(sightings)
-                    })
-                    .catch( error => {
-                      res.json(error)
-                    })
- })
+router.get("/get-sightings", function(req, res, next) {
+  sightingController
+    .getAllSightings()
+    .then(sightings => {
+      res.send(sightings);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
 
 /* GET a Sighting by ID for review */
 router.get("/admin-dashboard/:id", function(req, res, next) {
@@ -52,7 +53,7 @@ router.get("/admin-dashboard/:id", function(req, res, next) {
     });
 });
 
-// POST in 
+// POST in
 router.post("/signin", function(req, res, next) {
   jwtController
     .login(req.body)
