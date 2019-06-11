@@ -48,7 +48,8 @@ module.exports = {
 
   rejectSighting: function(req) {
     return new Promise((resolve, reject) => {
-      Sighting.findByIdAndUpdate(req.params.id)
+      console.log(req.body)
+      Sighting.findByIdAndUpdate(req.body.id)
         .then(sighting => {
           let rejectedSighting = sighting;
           rejectedSighting.isApproved = false;

@@ -111,12 +111,12 @@ router.get("/admin-dashboard/approve-sighting/:id", function(req, res, next) {
     });
 });
 
-/* GET a Sighting Rejection */
-router.get("/admin-dashboard/reject-sighting/:id", function(req, res, next) {
+/* POST a Sighting Rejection */
+router.get("/admin-dashboard/reject-sighting/", function(req, res, next) {
   sightingController
     .rejectSighting(req)
     .then(sighting => {
-      res.redirect("../../admin-dashboard");
+      res.json(sighting)
     })
     .catch(error => {
       res.json(error);
