@@ -9,6 +9,7 @@ module.exports = {
         (newSighting.seenDate = params.seenDate),
         (newSighting.location = params.location),
         (newSighting.isApproved = false),
+        (newSighting.imageUrl = params.imageUrl),
         (newSighting.description = params.description);
 
       newSighting
