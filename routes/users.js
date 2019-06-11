@@ -99,12 +99,12 @@ router.post("/new-sighting", function(req, res, next) {
     });
 });
 
-/* GET a Sighting Approval */
-router.get("/admin-dashboard/approve-sighting/:id", function(req, res, next) {
+/* POST a Sighting Approval */
+router.post("/admin-dashboard/approve-sighting", function(req, res, next) {
   sightingController
     .approveSighting(req)
     .then(sighting => {
-      res.redirect("../../admin-dashboard");
+      res.json(sighting)
     })
     .catch(error => {
       res.json(error);
@@ -112,7 +112,7 @@ router.get("/admin-dashboard/approve-sighting/:id", function(req, res, next) {
 });
 
 /* POST a Sighting Rejection */
-router.get("/admin-dashboard/reject-sighting/", function(req, res, next) {
+router.post("/admin-dashboard/reject-sighting", function(req, res, next) {
   sightingController
     .rejectSighting(req)
     .then(sighting => {
