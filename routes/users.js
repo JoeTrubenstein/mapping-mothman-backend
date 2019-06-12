@@ -17,6 +17,76 @@ router.get("/", function(req, res, next) {
 //   failureFlash: true
 // }))
 
+/* GET all Sightings for admin */
+router.get("/admin-dashboard", function(req, res, next) {
+  sightingController
+    .getAllSightings()
+    .then(sightings => {
+      res.render("dash", {
+        title: "Welcome Mothman Admin",
+        sightings: sightings
+      });
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
+/* GET all Sightings for front end */
+router.get("/get-sightings", function(req, res, next) {
+  sightingController
+    .getAllSightings()
+    .then(sightings => {
+      res.send(sightings);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
+/* GET sightings for admin dash for front end */
+router.get(
+  "/get-dash-sightings",
+  passport.authenticate("jwt", { session: false }),
+  function(req, res, next) {
+    sightingController
+      .getAllSightings()
+      .then(sightings => {
+        res.send(sightings);
+      })
+      .catch(error => {
+        res.json(error);
+      });
+  }
+);
+
+/* GET a Sighting by ID for review */
+router.get("/admin-dashboard/:id", function(req, res, next) {
+  sightingController
+    .reviewSighting(req)
+    .then(sighting => {
+      res.render("review", {
+        title: "Welcome Mothman Admin",
+        sighting: sighting
+      });
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
+// POST in and get a token
+router.post("/signin", function(req, res, next) {
+  jwtController
+    .login(req.body)
+    .then(token => {
+      res.json(token);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
 /* POST a new user. */
 router.post("/signup", function(req, res, next) {
   console.log('it is hit the signup url backend : ', req.body);
