@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require("passport");
 
 var sightingController = require("../controllers/sightingController");
-var jwtController = require("../controllers/jwtController")
+var jwtController = require("../controllers/jwtController");
 var userController = require("../controllers/userController");
 
 /* GET users listing. */
@@ -27,26 +27,32 @@ router.get("/admin-dashboard", function(req, res, next) {
 });
 
 /* GET all Sightings for front end */
-router.get('/get-sightings', function(req, res, next) {
-  sightingController.getAllSightings()
-                    .then( sightings => {
-                      res.send(sightings)
-                    })
-                    .catch( error => {
-                      res.json(error)
-                    })
- })
+router.get("/get-sightings", function(req, res, next) {
+  sightingController
+    .getAllSightings()
+    .then(sightings => {
+      res.send(sightings);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
 
- /* GET sightings for admin dash for front end */
-router.get('/get-dash-sightings',passport.authenticate("jwt", { session: false }), function(req, res, next) {
-  sightingController.getAllSightings()
-                    .then( sightings => {
-                      res.send(sightings)
-                    })
-                    .catch( error => {
-                      res.json(error)
-                    })
- })
+/* GET sightings for admin dash for front end */
+router.get(
+  "/get-dash-sightings",
+  passport.authenticate("jwt", { session: false }),
+  function(req, res, next) {
+    sightingController
+      .getAllSightings()
+      .then(sightings => {
+        res.send(sightings);
+      })
+      .catch(error => {
+        res.json(error);
+      });
+  }
+);
 
 /* GET a Sighting by ID for review */
 router.get("/admin-dashboard/:id", function(req, res, next) {
@@ -100,27 +106,35 @@ router.post("/new-sighting", function(req, res, next) {
 });
 
 /* POST a Sighting Approval */
-router.post("/admin-dashboard/approve-sighting", function(req, res, next) {
-  sightingController
-    .approveSighting(req)
-    .then(sighting => {
-      res.json(sighting)
-    })
-    .catch(error => {
-      res.json(error);
-    });
-});
+router.post(
+  "/admin-dashboard/approve-sighting",
+  passport.authenticate("jwt", { session: false }),
+  function(req, res, next) {
+    sightingController
+      .approveSighting(req)
+      .then(sighting => {
+        res.json(sighting);
+      })
+      .catch(error => {
+        res.json(error);
+      });
+  }
+);
 
 /* POST a Sighting Rejection */
-router.post("/admin-dashboard/reject-sighting", function(req, res, next) {
-  sightingController
-    .rejectSighting(req)
-    .then(sighting => {
-      res.json(sighting)
-    })
-    .catch(error => {
-      res.json(error);
-    });
-});
+router.post(
+  "/admin-dashboard/reject-sighting",
+  passport.authenticate("jwt", { session: false }),
+  function(req, res, next) {
+    sightingController
+      .rejectSighting(req)
+      .then(sighting => {
+        res.json(sighting);
+      })
+      .catch(error => {
+        res.json(error);
+      });
+  }
+);
 
 module.exports = router;
