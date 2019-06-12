@@ -25,9 +25,11 @@ module.exports = {
   },
 
   approveSighting: function(req) {
+    console.log(req)
     return new Promise((resolve, reject) => {
       Sighting.findByIdAndUpdate(req.body.id)
         .then(sighting => {
+          console.log(sighting)
           let approvedSighting = sighting;
           approvedSighting.isApproved = true;
           approvedSighting
