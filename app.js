@@ -73,6 +73,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use(flash());
 
+require("./utils/passport")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
