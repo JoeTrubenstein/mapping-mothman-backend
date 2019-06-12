@@ -4,6 +4,7 @@ var passport = require("passport");
 
 var sightingController = require("../controllers/sightingController");
 var userController = require("../controllers/userController");
+var jwtController = require("../controllers/jwtController")
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
@@ -16,6 +17,7 @@ router.get("/", function(req, res, next) {
 //   failureRedirect: '/users/signin',
 //   failureFlash: true
 // }))
+
 
 /* GET all Sightings for admin */
 router.get("/admin-dashboard", function(req, res, next) {
@@ -69,18 +71,6 @@ router.get("/admin-dashboard/:id", function(req, res, next) {
         title: "Welcome Mothman Admin",
         sighting: sighting
       });
-    })
-    .catch(error => {
-      res.json(error);
-    });
-});
-
-// POST in and get a token
-router.post("/signin", function(req, res, next) {
-  jwtController
-    .login(req.body)
-    .then(token => {
-      res.json(token);
     })
     .catch(error => {
       res.json(error);
@@ -145,6 +135,7 @@ router.post(
   "/admin-dashboard/approve-sighting",
   passport.authenticate("jwt", { session: false }),
   function(req, res, next) {
+    console.log("route hit")
     sightingController
       .approveSighting(req)
       .then(sighting => {
@@ -171,5 +162,18 @@ router.post(
       });
   }
 );
+
+// POST in and get a token for ADMIN only
+router.post("/admin-signin", function(req, res, next) {
+  console.log("hit signin")
+  jwtController
+    .login(req.body)
+    .then(token => {
+      res.json(token);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
 
 module.exports = router;
